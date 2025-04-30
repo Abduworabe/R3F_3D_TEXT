@@ -1,4 +1,5 @@
 import { OrbitControls, Center, useMatcapTexture, Text3D, } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 import { Perf } from 'r3f-perf'
 import { useState,useRef } from 'react'
 
@@ -64,6 +65,14 @@ import { useState,useRef } from 'react'
 //store it by usening useState
 //put it back on the <mesh> of the donut from the state 
 
+//Material
+
+//in the Shaders of the performance montinring, there is only one shader 
+//b/c three.js automatically re-use shaders when possible 
+//we could leave it like that but let's separate teh matrial as we did for the geomerty so that we
+//are only using one matrieal for the  text ane the donuts
+
+//Animating the donat
 
 
 const App = () => {
@@ -75,8 +84,20 @@ const App = () => {
   // tempArray.map(()=>{
 
   // })
-
+const animaDonat=useRef()
   const [tsowrusGeometry, setTursGeometry]=useState()
+  useFrame((state, delta) => {
+    if (animaDonat.current && animaDonat.current.children) {
+      for (const donat of animaDonat.current.children) {
+        donat.rotation.y += delta; // Rotate each child around the y-axis
+      }
+    }
+  });
+  useFrame((state, delta)=>{
+    for(const donat of animaDonat.current.children)
+// animaDonat.current.children.
+    donat.rotation.y+=delta;
+  })
   
   return <>
     <Perf position="top-left" />
@@ -100,10 +121,12 @@ const App = () => {
        
         bevelSegments={5}
       >
+        
         I'm full stack developer
         <meshMatcapMaterial matcap={matcapTexture} />
       </Text3D>
     </Center>
+    <group ref={animaDonat}>
     {
        [...Array(100)].map(()=>
         <mesh
@@ -125,6 +148,7 @@ const App = () => {
       </mesh>
        )
     }
+    </group>
    
   </>
 }
