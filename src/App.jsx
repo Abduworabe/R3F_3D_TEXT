@@ -54,6 +54,16 @@ import { Perf } from 'r3f-perf'
 //Add  some randomnes to the positon 
 //Add some randomness to the scale
 
+//Optimisation
+//Geomerties
+//We have many geomerties althougen we should have only two (the donut and the text)
+//and re use
+//to fix that we are going to do a silly trick
+//crate on <totusGeomtry> outside of the donut
+//store it by usening useState
+//put it back on the <mesh> of the donut from the state 
+
+
 
 const App = () => {
   
