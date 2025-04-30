@@ -1,5 +1,6 @@
-import { OrbitControls, Center, useMatcapTexture, Text3D } from '@react-three/drei'
+import { OrbitControls, Center, useMatcapTexture, Text3D, } from '@react-three/drei'
 import { Perf } from 'r3f-perf'
+import { useState,useRef } from 'react'
 
 //The Text
 //Text3D helper
@@ -74,14 +75,14 @@ const App = () => {
   // tempArray.map(()=>{
 
   // })
+
+  const [tsowrusGeometry, setTursGeometry]=useState()
   
   return <>
-
-
     <Perf position="top-left" />
 
     <OrbitControls makeDefault />
-
+    <torusGeometry ref={setTursGeometry} args={[1, 0.6, 16, 32]}/>
     {/* <mesh scale={1.5}>
       <boxGeometry />
       <meshNormalMaterial />
@@ -96,7 +97,7 @@ const App = () => {
         bevelThickness={0.02}
         bevelSize={0.02}
         bevelOffset={0}
-        
+       
         bevelSegments={5}
       >
         I'm full stack developer
@@ -105,7 +106,8 @@ const App = () => {
     </Center>
     {
        [...Array(100)].map(()=>
-        <mesh 
+        <mesh
+       geometry={tsowrusGeometry} 
         position={[
           (Math.random()-0.5)*10,
           (Math.random()-0.5)*10,
@@ -118,7 +120,7 @@ const App = () => {
          0
         ]}
         >
-        <torusGeometry  args={[1, 0.6, 16, 32]}/>
+       
         <meshMatcapMaterial matcap={donatMatcap[0]}  />
       </mesh>
        )
