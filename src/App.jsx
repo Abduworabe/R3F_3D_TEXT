@@ -122,7 +122,7 @@ const animaDonat=useRef()
         bevelSegments={5}
       >
         
-        I'm full stack developer
+         I'm full stack developer
         <meshMatcapMaterial matcap={matcapTexture} />
       </Text3D>
     </Center>
